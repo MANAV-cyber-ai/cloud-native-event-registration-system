@@ -1,0 +1,13 @@
+flowchart LR
+    A[Student Browser] --> B[Public Registration Form]
+    B --> C[PHP API Layer]
+    C --> D[(MySQL: cloud_event_registration_db)]
+    C --> E[(notification_outbox)]
+    C --> F[(registration_activity_log)]
+    D --> G[Admin Dashboard]
+
+    C -. migration .-> H[Cloud Run]
+    D -. migration .-> I[Cloud SQL]
+    E -. future worker .-> J[Pub/Sub + Email Service]
+    H -. observability .-> K[Cloud Logging / Monitoring]
+
